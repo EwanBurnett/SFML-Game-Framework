@@ -75,21 +75,22 @@ void GameMap::RenderMap(sf::RenderWindow& window)
 //TODO - Refactor & optimize, add layer support, properly comment. Consider upgrading to use XML or a TMX parser, so I can do less work
 std::vector<MapLayer> GameMap::LoadFromFile(std::string FileName, sf::Texture TileMap)
 {
-	std::ifstream mapFile;
+	std::ifstream mapFile;	// <-- A file stream to the map's file (stored as CSV per layer, / delimter for seperation.)
 	mapFile.open(FileName);
 
-	std::vector<MapLayer> lLayers;
-	std::vector<int> lLayer;
+	std::vector<MapLayer> l_map; // <-- The complete map data to be returned.
+	std::vector<int> lLayer; // <-- The data of the layer, read from the file
 
-	MapLayer layerCache;
+	MapLayer layerCache; // <-- An empty map layer. To be populated with layer data.
 
+	//Timing variables
 	sf::Time elapsed;
 	sf::Clock clock;
 
 	std::cout << "Loading " << FileName << "..." << std::endl;
 
-	int maplayers = 0;
-	std::vector<std::string> lLayerCache;
+	uint8_t maplayers = 0; // <-- A simple counter for the number of layers.
+	std::vector<std::string> lLayerCache; // <-- used to contain the layer data, while it's still a string.
 
 	//Copy data from the file to the lLayerCache vector..
 	while (mapFile.good()) {
@@ -108,7 +109,8 @@ std::vector<MapLayer> GameMap::LoadFromFile(std::string FileName, sf::Texture Ti
 		//Parse string, using ',' as delimiter.
 		std::string delimiter = ",";
 		size_t pos = 0;
-		int token;
+		uint16_t token;
+
 		while ((pos = currentLayer.find(delimiter)) != std::string::npos) {
 			token = std::stoi(currentLayer.substr(0, pos));
 			lLayer.push_back(token); //Add the data to the lLayer vector...
@@ -119,7 +121,7 @@ std::vector<MapLayer> GameMap::LoadFromFile(std::string FileName, sf::Texture Ti
 		layerCache.ConstructLayer(lLayer, sf::Vector2i(0, 0), TileMap);
 
 		//Add that to the layers vector
-		lLayers.push_back(layerCache);
+		l_map.push_back(layerCache);
 		lLayer.clear(); //Clear the layer cache
 	}
 
@@ -127,5 +129,5 @@ std::vector<MapLayer> GameMap::LoadFromFile(std::string FileName, sf::Texture Ti
 	std::cout << "Map " << FileName << " finished loading in " << elapsed.asMilliseconds() << "ms.\n " << maplayers << " layers drawn.\n" << std::endl;
 	
 
-	return(lLayers);
+	return(l_map);
 }
