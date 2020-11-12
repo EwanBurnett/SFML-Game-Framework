@@ -164,6 +164,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Framework\GameMap.cpp" />
+    <ClCompile Include="src\Framework\GUI\Button.cpp" />
+    <ClCompile Include="src\Framework\GUI\TextBox.cpp" />
+    <ClCompile Include="src\Framework\GUI\Widget.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Framework\Animator.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -177,6 +180,9 @@
     <ClInclude Include="src\Framework\Animator.h" />
     <ClInclude Include="src\Framework\Game.h" />
     <ClInclude Include="src\Framework\GameMap.h" />
+    <ClInclude Include="src\Framework\GUI\Button.h" />
+    <ClInclude Include="src\Framework\GUI\TextBox.h" />
+    <ClInclude Include="src\Framework\GUI\Widget.h" />
     <ClInclude Include="src\Framework\MapLayer.h" />
     <ClInclude Include="src\Framework\ResourceManager.h" />
     <ClInclude Include="src\Framework\State.h" />

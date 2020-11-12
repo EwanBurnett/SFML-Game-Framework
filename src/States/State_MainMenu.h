@@ -2,6 +2,8 @@
 #include "../Framework/State_Empty.h"
 #include "../Framework/GameMap.h"
 #include "../Framework/MapLayer.h"
+#include "../Framework/GUI/Button.h"
+#include "../Framework/GUI/TextBox.h"
 
 class State_MainMenu :
     public State_Empty
@@ -13,6 +15,8 @@ class State_MainMenu :
     void EventHandler(sf::Event& event);
 
 private:
+    void printSomething();
+
     //Private variables for this specific game state
     GameMap map;
     MapLayer mLayer;
@@ -20,4 +24,5 @@ private:
     std::vector<MapLayer> Layers;
 
     sf::Music music;
+    UI::TextBox tBox;
 };

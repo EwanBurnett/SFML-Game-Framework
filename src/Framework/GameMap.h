@@ -18,7 +18,7 @@ public:
 private:
 	std::vector<MapLayer> m_Layers; //The individual layers within the tilemap. Drawn from back to front.
 
-	uint16_t m_TileSize = 16; //How big each tile is. 16 = 16 x 16 tiles etc.
+	int m_TileSize = 16; //How big each tile is. 16 = 16 x 16 tiles etc.
 	int m_MapWidth = 1; //The width of the map (in tiles).
 	int m_MapHeight = 1; //The height of the map (in tiles).
 };
