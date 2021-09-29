@@ -10,12 +10,6 @@ App::App(IGame* gameInst)
 
 	m_GameInstance = gameInst;
 
-	//Set up the App Window
-	m_AppWindow.create(sf::VideoMode(1280, 720), "Game Window");
-
-	m_AppWindow.setFramerateLimit(60);
-	m_AppWindow.setVerticalSyncEnabled(false);
-
 	//Initialize the application
 	assert(Init());
 
@@ -23,30 +17,48 @@ App::App(IGame* gameInst)
 	DoFrame();
 }
 
-bool App::Init() const
+bool App::Init()
 {
-	//Init Draw Queue
-	m_AppInstance->m_DrawQueue.resize(3);
-
 	//Start Time
-
+	
 	//Seed RNG
+	m_RNG.Seed(0);
+
+	//Pre-Allocate Memory
+	
+	//Set up the App Window
+	m_AppWindow.setFramerateLimit(60);
+	m_AppWindow.setVerticalSyncEnabled(false);
 
 	//Init Managers
 
-	//Pre-Allocate Memory
+	//Pre-load resources
 
-	//Init Box2D World
+	//Load Config	
+
+	//Create the App Window
+	m_AppWindow.create(sf::VideoMode(1280, 720), "Game Window");
+
+	//Init Draw Queue
+	m_AppInstance->m_DrawQueue.resize(3);
+
+	
+
+	//Init Physics
 	//b2Vec2 gravity(0.0f, -9.8);
 	//b2World world(gravity);
-
-	return true;
+	
+	
+	return true; 
 }
 
 void App::DoFrame()
 {
 	while (m_AppWindow.isOpen()) {
 		//Calculate App Timing
+		m_DeltaTime = m_Clock.restart();
+		m_AppTime += m_DeltaTime;
+		float dt = m_DeltaTime.asSeconds();
 
 		//Process and forward input events
 		sf::Event event;
@@ -56,8 +68,8 @@ void App::DoFrame()
 		}
 
 		//Update the application
-		Update(0);
-		FixedUpdate(0);
+		Update(dt);
+		FixedUpdate(dt);
 
 		//Draw to the screen
 		for (auto& layer : m_DrawQueue) {
@@ -99,9 +111,10 @@ void App::Start()
 
 void App::Update(float deltaTime)
 {
-	m_AppInstance->m_GameInstance->Update(deltaTime);
+	m_GameInstance->Update(deltaTime);
 }
 
 void App::FixedUpdate(float deltaTime)
 {
+	//m_GameInstance->FixedUpdate(deltaTime);
 }

@@ -1,17 +1,35 @@
 #include "App.h"
+#include <Windows.h>
 #include <iostream>
 
 int main() {
+    //Set up Memory Leak Flags
+    int tmpDbgFlag = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
+    //Always perform a memory leak check before the application exits
+    tmpDbgFlag |= _CRTDBG_LEAK_CHECK_DF;
+    _CrtSetDbgFlag(tmpDbgFlag);
+
+    //Init Game Logger
+    
+    //Check that this is the only running instance of the game
+
+
+    //Instantiate the Game and Application
     Game game;
     App app(&game);
-    
+
+    std::cout << "Game Exited" << std::endl;
+    return 'sfml';
 }
 void Game::Update(float deltaTime) {
     
-        sf::CircleShape shape(200.0f);
-        shape.setFillColor(sf::Color::Blue);
-        App::Draw(0, shape);
+    //Debug Code
+    sf::CircleShape shape(200.0f);
+    shape.setFillColor(sf::Color::Blue);
+    App::Draw(0, shape);
+    RNG rng;
 
-        std::cout << "Updating Game" << std::endl;
+    std::cout << rng.RandInt(100) << std::endl;
+
 }
 

@@ -9,6 +9,7 @@
 #include <unordered_set>
 #include <vector>
 #include <assert.h>
+#include "Utils/Random.h"
 
 
 class IGame {
@@ -21,7 +22,7 @@ public:
 	App(IGame* gameInst);
 	~App() = default;
 
-	bool Init() const;
+	bool Init();
 	void DoFrame();
 
 	bool Closed() const;
@@ -49,6 +50,12 @@ private:
 	std::vector<std::unordered_set<sf::Drawable*>> m_DrawQueue;
 
 	bool m_bIsClosed;
+
+	RNG m_RNG;
+
+	sf::Clock m_Clock;
+	sf::Time m_DeltaTime;
+	sf::Time m_AppTime;
 };
 
 class Game : public IGame {
