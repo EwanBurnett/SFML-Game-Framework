@@ -32,6 +32,9 @@ public:
 
 	static void Exit();
 
+	//Called when closing the application.
+	void OnExit();
+
 	//Game Application Methods
 
 	//Start is called when the game begins to run.

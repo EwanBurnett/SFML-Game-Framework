@@ -1,4 +1,5 @@
 #include "App.h"
+#include "Utils/tinyxml2.h"
 #include <Windows.h>
 #include <iostream>
 
@@ -11,8 +12,6 @@ int main() {
 
     //Init Game Logger
     
-    //Check that this is the only running instance of the game
-
 
     //Instantiate the Game and Application
     Game game;
@@ -21,6 +20,8 @@ int main() {
     std::cout << "Game Exited" << std::endl;
     return 'sfml';
 }
+
+
 void Game::Update(float deltaTime) {
     
     //Debug Code

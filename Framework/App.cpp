@@ -105,6 +105,18 @@ void App::Exit()
 	m_AppInstance->m_bIsClosed = true;
 }
 
+void App::OnExit()
+{
+	//Deallocate systems in reverse order
+
+	//Managers
+	//Game Window
+	m_AppWindow.close();
+	//Resource Cache
+	//RNG
+	//Time
+}
+
 void App::Start()
 {
 }
