@@ -5,6 +5,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <box2d/box2d.h>
 #include <unordered_set>
 #include <vector>
 #include <assert.h>
@@ -48,4 +49,10 @@ private:
 	std::vector<std::unordered_set<sf::Drawable*>> m_DrawQueue;
 
 	bool m_bIsClosed;
+};
+
+class Game : public IGame {
+public:
+	void Update(float deltaTime) override;
+	
 };

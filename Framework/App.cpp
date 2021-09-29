@@ -37,6 +37,8 @@ bool App::Init() const
 	//Pre-Allocate Memory
 
 	//Init Box2D World
+	b2Vec2 gravity(0.0f, -9.8);
+	b2World world(gravity);
 
 	return true;
 }
