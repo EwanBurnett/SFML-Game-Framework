@@ -161,6 +161,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Managers\ResourceManager.cpp" />
+    <ClCompile Include="Utils\Animator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Managers\ResourceManager.h" />
+    <ClInclude Include="Utils\Animator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
