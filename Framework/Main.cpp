@@ -28,9 +28,10 @@ void Game::Update(float deltaTime) {
     sf::CircleShape shape(200.0f);
     shape.setFillColor(sf::Color::Blue);
     App::Draw(0, shape);
+    
     RNG rng;
 
-    std::cout << rng.RandInt(100) << std::endl;
+    //std::cout << deltaTime << std::endl;
 
 }
 

@@ -10,6 +10,7 @@
 #include <vector>
 #include <assert.h>
 #include "Utils/Random.h"
+#include "Utils/Time.h"
 
 
 class IGame {
@@ -55,6 +56,7 @@ private:
 	bool m_bIsClosed;
 
 	RNG m_RNG;
+	Time m_Time;
 
 	sf::Clock m_Clock;
 	sf::Time m_DeltaTime;
@@ -64,5 +66,4 @@ private:
 class Game : public IGame {
 public:
 	void Update(float deltaTime) override;
-	
 };

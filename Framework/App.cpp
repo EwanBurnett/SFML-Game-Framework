@@ -1,4 +1,5 @@
 #include "App.h"
+#include <iostream> //DEBUG
 
 App* App::m_AppInstance = nullptr;
 
@@ -9,7 +10,7 @@ App::App(IGame* gameInst)
 	m_AppInstance = this;
 
 	m_GameInstance = gameInst;
-
+	
 	//Initialize the application
 	assert(Init());
 
@@ -20,9 +21,11 @@ App::App(IGame* gameInst)
 bool App::Init()
 {
 	//Start Time
-	
+	m_Time.Reset();
+	m_Time.SetTimeScale(1.0f);
+
 	//Seed RNG
-	m_RNG.Seed(0);
+	m_RNG.Seed(m_Time.BaseTime());
 
 	//Pre-Allocate Memory
 	
@@ -45,8 +48,8 @@ bool App::Init()
 	
 
 	//Init Physics
-	//b2Vec2 gravity(0.0f, -9.8);
-	//b2World world(gravity);
+	/*b2Vec2 gravity(0.0f, -9.8);
+	b2World world(gravity);*/
 	
 	
 	return true; 
@@ -56,9 +59,14 @@ void App::DoFrame()
 {
 	while (m_AppWindow.isOpen()) {
 		//Calculate App Timing
-		m_DeltaTime = m_Clock.restart();
+
+		/*m_DeltaTime = m_Clock.restart();	//Using SFML Clock
 		m_AppTime += m_DeltaTime;
-		float dt = m_DeltaTime.asSeconds();
+		float dt = m_DeltaTime.asSeconds();*/
+		
+		m_Time.Tick();
+		float dt = m_Time.DeltaTime();
+		std::cout << m_Time.TotalTime() << std::endl;
 
 		//Process and forward input events
 		sf::Event event;
