@@ -12,7 +12,7 @@ struct RNG {
 inline void RNG::Seed(float time)
 {
     //Seed the RNG to the input time. 
-    srand(time);
+    srand((unsigned int)time);
 }
 
 inline int RNG::RandInt(int max)

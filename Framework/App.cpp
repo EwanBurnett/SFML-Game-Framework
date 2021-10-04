@@ -1,5 +1,4 @@
 #include "App.h"
-#include <iostream> //DEBUG
 
 App* App::m_AppInstance = nullptr;
 
@@ -24,6 +23,8 @@ bool App::Init()
 	m_Time.Reset();
 	m_Time.SetTimeScale(1.0f);
 
+	m_FixedInterval = 1.0f / 60.0f;	//60fps fixed timestep
+
 	//Seed RNG
 	m_RNG.Seed(m_Time.BaseTime());
 
@@ -45,29 +46,24 @@ bool App::Init()
 	//Init Draw Queue
 	m_AppInstance->m_DrawQueue.resize(3);
 
-	
-
 	//Init Physics
 	/*b2Vec2 gravity(0.0f, -9.8);
 	b2World world(gravity);*/
 	
-	
+	//Start the Game 
+	Start();
+
 	return true; 
 }
 
 void App::DoFrame()
 {
 	while (m_AppWindow.isOpen()) {
-		//Calculate App Timing
 
-		/*m_DeltaTime = m_Clock.restart();	//Using SFML Clock
-		m_AppTime += m_DeltaTime;
-		float dt = m_DeltaTime.asSeconds();*/
-		
+		//Calculate App Timing
 		m_Time.Tick();
 		float dt = m_Time.DeltaTime();
-		std::cout << m_Time.TotalTime() << std::endl;
-
+		
 		//Process and forward input events
 		sf::Event event;
 		while (m_AppWindow.pollEvent(event)) {
@@ -77,7 +73,7 @@ void App::DoFrame()
 
 		//Update the application
 		Update(dt);
-		FixedUpdate(dt);
+		FixedUpdate((float)m_FixedInterval);
 
 		//Draw to the screen
 		for (auto& layer : m_DrawQueue) {
@@ -91,8 +87,7 @@ void App::DoFrame()
 		m_AppWindow.clear();
 		m_AppWindow.display();
 	}
-	
-	
+
 }
 
 bool App::Closed() const
@@ -127,6 +122,7 @@ void App::OnExit()
 
 void App::Start()
 {
+	m_GameInstance->Start();
 }
 
 void App::Update(float deltaTime)
@@ -136,5 +132,5 @@ void App::Update(float deltaTime)
 
 void App::FixedUpdate(float deltaTime)
 {
-	//m_GameInstance->FixedUpdate(deltaTime);
+	m_GameInstance->FixedUpdate(deltaTime);
 }

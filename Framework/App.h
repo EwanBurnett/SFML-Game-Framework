@@ -15,7 +15,9 @@
 
 class IGame {
 public:
+	virtual void Start() = 0;
 	virtual void Update(float deltaTime) = 0;
+	virtual void FixedUpdate(float deltaTime) = 0;
 };
 
 class App {
@@ -57,13 +59,12 @@ private:
 
 	RNG m_RNG;
 	Time m_Time;
-
-	sf::Clock m_Clock;
-	sf::Time m_DeltaTime;
-	sf::Time m_AppTime;
+	double m_FixedInterval;
 };
 
 class Game : public IGame {
 public:
+	void Start() override;
 	void Update(float deltaTime) override;
+	void FixedUpdate(float deltaTime) override;
 };

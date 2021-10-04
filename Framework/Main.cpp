@@ -21,6 +21,9 @@ int main() {
     return 'sfml';
 }
 
+void Game::Start() {
+    std::cout << "Game Started!" << std::endl;
+}
 
 void Game::Update(float deltaTime) {
     
@@ -28,10 +31,12 @@ void Game::Update(float deltaTime) {
     sf::CircleShape shape(200.0f);
     shape.setFillColor(sf::Color::Blue);
     App::Draw(0, shape);
-    
-    RNG rng;
 
     //std::cout << deltaTime << std::endl;
 
+}
+
+void Game::FixedUpdate(float deltaTime) {
+    //std::cout << "Constantly updating! : " << deltaTime << std::endl;
 }
 

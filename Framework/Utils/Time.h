@@ -10,10 +10,10 @@ public:
 
 	//Returns time in seconds
 	float TotalTime() const;
-	//Interval between frames. 
+	//Returns the Interval between frames. 
 	float DeltaTime() const;
 
-	//Returns system time
+	//Returns the last time Reset() was called. 
 	float BaseTime() const;
 
 	//Changes the timescale of the application
@@ -48,28 +48,30 @@ inline Time::Time()
 	QueryPerformanceFrequency((LARGE_INTEGER*)&countsPerSec);
 	mSecondsPerCount = 1.0 / (double)countsPerSec;
 
+	//Set the base time of this timer after construction is complete
 	Reset();
 }
 
 inline float Time::TotalTime() const
 {
+	//Returns the total time in the scope of the timer. Does not include paused time.
 	if (mIsStopped) {
-		return((float)((mStopTime - mPausedTime) - mBaseTime) * mSecondsPerCount * mTimeScale);
+		return((float)(((mStopTime - mPausedTime) - mBaseTime) * mSecondsPerCount * mTimeScale));
 	}
 	else {
-		return((float)((mCurrentTime - mPausedTime) - mBaseTime) * mSecondsPerCount * mTimeScale);
+		return((float)(((mCurrentTime - mPausedTime) - mBaseTime) * mSecondsPerCount * mTimeScale));
 	}
 
 }
 
 inline float Time::DeltaTime() const
 {
-	return (float)mDeltaTime * mTimeScale;
+	return (float)(mDeltaTime * mTimeScale);
 }
 
 inline float Time::BaseTime() const
 {
-	return mBaseTime;
+	return (float)mBaseTime;
 }
 
 inline void Time::Reset()
