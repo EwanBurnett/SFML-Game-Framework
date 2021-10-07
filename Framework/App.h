@@ -10,11 +10,14 @@
 #include <vector>
 #include <assert.h>
 #include "Utils/Random.h"
+#include "Utils/Time.h"
 
 
 class IGame {
 public:
+	virtual void Start() = 0;
 	virtual void Update(float deltaTime) = 0;
+	virtual void FixedUpdate(float deltaTime) = 0;
 };
 
 class App {
@@ -55,14 +58,13 @@ private:
 	bool m_bIsClosed;
 
 	RNG m_RNG;
-
-	sf::Clock m_Clock;
-	sf::Time m_DeltaTime;
-	sf::Time m_AppTime;
+	Time m_Time;
+	double m_FixedInterval;
 };
 
 class Game : public IGame {
 public:
+	void Start() override;
 	void Update(float deltaTime) override;
-	
+	void FixedUpdate(float deltaTime) override;
 };

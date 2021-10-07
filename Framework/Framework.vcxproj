@@ -171,6 +171,7 @@
     <ClInclude Include="Managers\ResourceManager.h" />
     <ClInclude Include="Utils\Animator.h" />
     <ClInclude Include="Utils\Random.h" />
+    <ClInclude Include="Utils\Time.h" />
     <ClInclude Include="Utils\tinyxml2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
