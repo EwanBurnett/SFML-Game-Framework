@@ -64,6 +64,9 @@ void App::DoFrame()
 		m_Time.Tick();
 		float dt = m_Time.DeltaTime();
 		
+		static float accumulator = 0;
+		accumulator += dt;
+
 		//Process and forward input events
 		sf::Event event;
 		while (m_AppWindow.pollEvent(event)) {
@@ -73,7 +76,11 @@ void App::DoFrame()
 
 		//Update the application
 		Update(dt);
-		FixedUpdate((float)m_FixedInterval);
+		while (accumulator >= m_FixedInterval) {
+			FixedUpdate((float)m_FixedInterval);
+			accumulator -= m_FixedInterval;
+		}
+		
 
 		//Draw to the screen
 		for (auto& layer : m_DrawQueue) {
